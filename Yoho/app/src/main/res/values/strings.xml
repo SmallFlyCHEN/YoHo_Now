@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Yoho</string>
+    <string name="recommend_name">推荐</string>
+    <string name="column_name">栏目</string>
+    <string name="community_name">社区</string>
+    <string name="video_name">视频</string>
+    <string name="magazine_name">杂志</string>
+    <string name="recommend_one_tv">更新至</string>
+    <string name="recommend_one_tv_one">篇</string>
+    <string name="new_magazine_tv_one">YOHO!BOY</string>
+    <string name="new_magazine_tv_two">YOHO!GRIL</string>
+    <string name="new_magazine_tv_three">SPECIAL</string>
+</resources>

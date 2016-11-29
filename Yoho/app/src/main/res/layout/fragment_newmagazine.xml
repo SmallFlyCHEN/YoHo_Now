@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/new_magazine">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/fragment_new_magazine_lin"
+        android:background="@color/newmagazin_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="@dimen/fragment_new_magazine_layout_width"
+                android:layout_height="@dimen/newmagazine_tv_height"
+                android:layout_marginTop="@dimen/fragment_new_magazine_top"
+                android:background="@color/main_radiogroup"
+                android:layout_marginLeft="@dimen/paddingBottom"
+                android:text="@string/new_magazine_tv_one"
+                android:gravity="center"
+                android:textSize="@dimen/paddingBottom"
+                android:textColor="@color/newmagazin_tv" />
+
+            <Button
+                style="@style/newmagazine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/newmagazine_btn_top"
+                android:textSize="@dimen/paddingBottom"
+                android:text="More >"
+                android:id="@+id/button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_boy_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_boy_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_boy_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_boy_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_boy_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_boy_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/fragment_new_magazine_lin"
+        android:background="@color/newmagazin_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="@dimen/fragment_new_magazine_layout_width"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/fragment_new_magazine_top"
+                android:layout_marginLeft="@dimen/paddingBottom"
+                android:background="@color/main_radiogroup"
+                android:gravity="center"
+                android:text="@string/new_magazine_tv_two"
+                android:textSize="@dimen/paddingBottom"
+                android:textColor="@color/newmagazin_tv" />
+
+            <Button
+                style="@style/newmagazine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/newmagazine_btn_top"
+                android:textSize="@dimen/paddingBottom"
+                android:text="More >" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_gril_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_gril_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_gril_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_gril_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_gril_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_gril_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/fragment_new_magazine_lin"
+        android:layout_marginTop="@dimen/fragment_new_magazine_lin"
+        android:background="@color/newmagazin_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="@dimen/fragment_new_magazine_layout_width"
+                android:layout_height="@dimen/newmagazine_tv_height"
+                android:layout_marginTop="@dimen/fragment_new_magazine_top"
+                android:layout_marginLeft="@dimen/paddingBottom"
+                android:textSize="@dimen/paddingBottom"
+                android:background="@color/main_radiogroup"
+                android:gravity="center"
+                android:text="@string/new_magazine_tv_three"
+                android:textColor="@color/newmagazin_tv" />
+
+            <Button
+                style="@style/newmagazine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/newmagazine_btn_top"
+                android:textSize="@dimen/paddingBottom"
+                android:text="More >" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_spec_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_spec_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_spec_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_spec_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/new_magazine_iv_spec_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="@dimen/paddingBottom"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/new_magazine_tv_spec_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fragment_recommend_rv_layout_marginLeft"
+                    android:textColor="@color/main_radiogroup"
+                    android:textSize="@dimen/paddingBottom" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
