@@ -9,7 +9,7 @@
     <dimen name="newmagazine_tv_height">20dp</dimen>
     <dimen name="newmagazine_tv_top">30dp</dimen>
     <dimen name="newmagazine_btn_top">15dp</dimen>
-    <dimen name="recommend_iv">150dp</dimen>
+    <dimen name="recommend_iv">180dp</dimen>
     <dimen name="recommend_iv_layout_width">180dp</dimen>
     <dimen name="recommend_iv_layout_height">140dp</dimen>
     <dimen name="recommend_tv_top">20dp</dimen>

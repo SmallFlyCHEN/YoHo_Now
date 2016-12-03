@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+       <com.youth.banner.Banner
+           app:image_scale_type="fit_xy"
+           android:layout_width="match_parent"
+           android:layout_height="160dp"
+           android:id="@+id/community_header_banner">
+       </com.youth.banner.Banner>
+
+
+    <com.dalong.francyconverflow.FancyCoverFlow
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/community_header_fan">
+    </com.dalong.francyconverflow.FancyCoverFlow>
+</LinearLayout>

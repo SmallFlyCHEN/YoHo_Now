@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/column_sr">
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/column_rv"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="20dp"
+        android:text="栏目"
+        android:textColor="@color/main_radiogroup"
+        android:gravity="center" />
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/column_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+    </com.github.jdsjlzx.recyclerview.LRecyclerView>
+    <com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/column_header">
+        //这里面写的就是头布局要写的内容
+        <ImageView
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@mipmap/header"/>
+    </com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader>
+
+</FrameLayout>

@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_marginTop="@dimen/item_one_iv"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/item_one_iv"
         android:layout_weight="1"
         android:orientation="vertical">
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
-            android:textColor="@color/main_radiogroup"
-            android:text="*"/>
+            android:text="*"
+            android:textColor="@color/main_radiogroup" />
+
         <TextView
             android:id="@+id/wallpaper_tv_journal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:textColor="@color/main_radiogroup"/>
+            android:textColor="@color/main_radiogroup" />
+
         <TextView
             android:id="@+id/wallpaper_tv_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:textColor="@color/main_radiogroup"/>
+            android:textColor="@color/main_radiogroup" />
+
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="3dp"
@@ -46,22 +52,22 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginTop="@dimen/item_one_iv"
+                android:id="@+id/wallpaper_iv_thumbImage_zero"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="250dp"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:id="@+id/wallpaper_iv_thumbImage_zero"/>
+                android:layout_marginTop="@dimen/item_one_iv"
+                android:scaleType="fitXY" />
 
             <ImageView
-                android:layout_marginTop="@dimen/item_one_iv"
+                android:id="@+id/wallpaper_iv_thumbImage_one"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/padding"
                 android:layout_marginRight="@dimen/padding"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:id="@+id/wallpaper_iv_thumbImage_one" />
+                android:layout_marginTop="@dimen/item_one_iv"
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,22 +77,22 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginTop="@dimen/item_one_iv"
+                android:id="@+id/wallpaper_iv_thumbImage_two"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:id="@+id/wallpaper_iv_thumbImage_two"/>
+                android:layout_marginTop="@dimen/item_one_iv"
+                android:scaleType="fitXY" />
 
             <ImageView
-                android:layout_marginTop="@dimen/item_one_iv"
-                android:layout_marginLeft="@dimen/padding"
-                android:layout_marginRight="@dimen/padding"
+                android:id="@+id/wallpaper_iv_thumbImage_three"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:id="@+id/wallpaper_iv_thumbImage_three"/>
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding"
+                android:layout_marginTop="@dimen/item_one_iv"
+                android:scaleType="fitXY" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

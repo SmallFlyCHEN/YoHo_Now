@@ -4,15 +4,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.dllo.yoho.R;
 import com.example.dllo.yoho.URLValues;
 import com.example.dllo.yoho.base.BaseFragment;
-import com.google.gson.Gson;
+import com.example.dllo.yoho.volley.NetHelper;
+import com.example.dllo.yoho.volley.NetListener;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -68,77 +65,64 @@ public class NewMagazineFragment extends BaseFragment{
     }
 
     private void getOneData() {
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(URLValues.NEWMAGAZINE_ONE_URL, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.NEWMAGAZINE_ONE_URL, NewMagazineOneBean.class, new NetListener<NewMagazineOneBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                NewMagazineOneBean oneBean = gson.fromJson(response, NewMagazineOneBean.class);
-                Picasso.with(getActivity()).load(oneBean.getData().get(0).getCover()).into(boyIvOne);
-                Picasso.with(getActivity()).load(oneBean.getData().get(1).getCover()).into(boyIvTwo);
-                Picasso.with(getActivity()).load(oneBean.getData().get(2).getCover()).into(boyIvThree);
+            public void successListener(NewMagazineOneBean response) {
+                Picasso.with(getActivity()).load(response.getData().get(0).getCover()).into(boyIvOne);
+                Picasso.with(getActivity()).load(response.getData().get(1).getCover()).into(boyIvTwo);
+                Picasso.with(getActivity()).load(response.getData().get(2).getCover()).into(boyIvThree);
 
-                boyTvOne.setText(oneBean.getData().get(0).getJournal());
-                boyTvTwo.setText(oneBean.getData().get(1).getJournal());
-                boyTvThree.setText(oneBean.getData().get(2).getJournal());
+                boyTvOne.setText(response.getData().get(0).getJournal());
+                boyTvTwo.setText(response.getData().get(1).getJournal());
+                boyTvThree.setText(response.getData().get(2).getJournal());
 
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
 
     private void getTwoData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(URLValues.NEWMAGAZINE_TWO_URL, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.NEWMAGAZINE_TWO_URL, NewMagazineTwoBean.class, new NetListener<NewMagazineTwoBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                NewMagazineTwoBean twoBean = gson.fromJson(response, NewMagazineTwoBean.class);
-                Picasso.with(getActivity()).load(twoBean.getData().get(0).getCover()).into(grilIvOne);
-                Picasso.with(getActivity()).load(twoBean.getData().get(1).getCover()).into(grilIvTwo);
-                Picasso.with(getActivity()).load(twoBean.getData().get(2).getCover()).into(grilIvThree);
+            public void successListener(NewMagazineTwoBean response) {
+                Picasso.with(getActivity()).load(response.getData().get(0).getCover()).into(grilIvOne);
+                Picasso.with(getActivity()).load(response.getData().get(1).getCover()).into(grilIvTwo);
+                Picasso.with(getActivity()).load(response.getData().get(2).getCover()).into(grilIvThree);
 
-                grilTvOne.setText(twoBean.getData().get(0).getJournal());
-                grilTvTwo.setText(twoBean.getData().get(1).getJournal());
-                grilTvThree.setText(twoBean.getData().get(2).getJournal());
+                grilTvOne.setText(response.getData().get(0).getJournal());
+                grilTvTwo.setText(response.getData().get(1).getJournal());
+                grilTvThree.setText(response.getData().get(2).getJournal());
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
 
     private void getThreeData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(URLValues.NEWMAGAZINE_THREE_URL, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.NEWMAGAZINE_THREE_URL, NewMagazineThreeBean.class, new NetListener<NewMagazineThreeBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                NewMagazineThreeBean threeBean = gson.fromJson(response, NewMagazineThreeBean.class);
-                Picasso.with(getActivity()).load(threeBean.getData().get(0).getCover()).into(specIvOne);
-                Picasso.with(getActivity()).load(threeBean.getData().get(1).getCover()).into(specIvTwo);
-                Picasso.with(getActivity()).load(threeBean.getData().get(2).getCover()).into(specIvThree);
+            public void successListener(NewMagazineThreeBean response) {
+                Picasso.with(getActivity()).load(response.getData().get(0).getCover()).into(specIvOne);
+                Picasso.with(getActivity()).load(response.getData().get(1).getCover()).into(specIvTwo);
+                Picasso.with(getActivity()).load(response.getData().get(2).getCover()).into(specIvThree);
 
-                specTvOne.setText(threeBean.getData().get(0).getJournal());
-                specTvTwo.setText(threeBean.getData().get(1).getJournal());
-                specTvThree.setText(threeBean.getData().get(2).getJournal());
+                specTvOne.setText(response.getData().get(0).getJournal());
+                specTvTwo.setText(response.getData().get(1).getJournal());
+                specTvThree.setText(response.getData().get(2).getJournal());
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
 
 }

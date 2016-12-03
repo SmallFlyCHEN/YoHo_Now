@@ -3,14 +3,24 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
-        android:scaleType="fitXY"
-        android:layout_marginRight="@dimen/item_one_tv"
-        android:layout_marginLeft="@dimen/item_one_iv"
-        android:id="@+id/tab_video_image"/>
+        android:layout_weight="5">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="fitXY"
+            android:layout_marginRight="@dimen/item_one_tv"
+            android:layout_marginLeft="@dimen/item_one_iv"
+            android:id="@+id/tab_video_image"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/inner_play"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

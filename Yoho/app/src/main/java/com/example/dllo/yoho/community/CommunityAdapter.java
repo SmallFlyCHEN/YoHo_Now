@@ -5,10 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.dllo.yoho.R;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by dllo on 16/11/26.
@@ -16,13 +22,14 @@ import java.util.List;
 
 public class CommunityAdapter extends BaseAdapter{
 
-    public static final int ONE= 1;
-    public static final int TWO= 2;
-    public static final int THREE = 3;
-    public static final int FOUR = 4;
-    public static final int COUNT = 5;
     List<CommunityBean.DataBean.ListBean> list;
     Context context;
+    private ArrayList<String> url;
+    public static final int URL_ONE = 1;
+    public static final int URL_TWO = 2;
+    private String oneUrl;
+    private String twoUrl;
+    private String threeUrl;
 
     public CommunityAdapter(Context context) {
         this.context = context;
@@ -31,30 +38,6 @@ public class CommunityAdapter extends BaseAdapter{
     public CommunityAdapter setList(List<CommunityBean.DataBean.ListBean> list) {
         this.list = list;
         return this;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return COUNT;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        //获取集合中的个数
-        int a = list.get(position).getBlocks().size();
-        //获取集合中第一个的类型
-        String str = list.get(position).getBlocks().get(0).getTemplateKey();
-        //定义类型
-        String type = "text";
-        if (a == 1){
-            return ONE;
-        }else if (a == 3){
-            return THREE;
-        }else if (a == 2 && str == type){
-            return TWO;
-        }else {
-            return FOUR;
-        }
     }
 
     @Override
@@ -74,40 +57,100 @@ public class CommunityAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CommunityOneViewHolder oneViewHolder = null;
-        CommunityTwoViewHolder twoViewHolder = null;
-        CommunityThreeViewHolder threeViewHolder = null;
-        CommunityFourViewHolder fourViewHolder = null;
+
+        CommunityViewHolder viewHolder = null;
         if (convertView == null){
-            switch (getItemViewType(position)){
-                case ONE:
-                    convertView = LayoutInflater.from(context).inflate(R.layout.item_community_one, parent, false);
-                    oneViewHolder = new CommunityOneViewHolder(convertView);
-                    break;
-                case TWO:
-                    break;
-                case THREE:
-                    break;
-                case FOUR:
-                    break;
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_community, parent, false);
+            viewHolder = new CommunityViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (CommunityViewHolder) convertView.getTag();
+        }
+
+        url = new ArrayList<>();
+        int type = list.get(position).getBlocks().size();
+        Picasso.with(context).load(getURLString(list.get(position).getAuthorInfo().getHeadIcon()))
+                .into(viewHolder.handIcon);
+        if (list.get(position).getPostsTitle() != null){
+            viewHolder.postsTitle.setText(list.get(position).getPostsTitle());
+        }else {
+
+        }
+        viewHolder.createTime.setText(String.valueOf(list.get(position).getCreateTime()));
+        viewHolder.comment.setText(String.valueOf(list.get(position).getComment()));
+        viewHolder.praise.setText(String.valueOf(list.get(position).getPraise()));
+        viewHolder.nickname.setText(list.get(position).getAuthorInfo().getNickName());
+        viewHolder.forumName.setText(list.get(position).getForumName());
+
+        for (int i = 0; i < type; i++) {
+            if (list.get(position).getBlocks().get(i).getTemplateKey().equals("text")){
+                if (list.get(position).getBlocks().get(i).getContentData() != null){
+                    viewHolder.contentData.setText(list.get(position).getBlocks().get(i).getContentData());
+                }else {
+                    viewHolder.contentData.setVisibility(View.GONE);
+                }
+            }else {
+                url.add(getURLString(list.get(position).getBlocks().get(i).getContentData()));
             }
+        }
+
+        if (url.size() == URL_ONE){
+            oneUrl = url.get(0);
+            viewHolder.twoIv.setVisibility(View.GONE);
+            viewHolder.threeIv.setVisibility(View.GONE);
+            Picasso.with(context).load(oneUrl).into(viewHolder.oneIv);
+        }else if (url.size() == URL_TWO){
+            oneUrl = url.get(0);
+            twoUrl = url.get(1);
+            viewHolder.twoIv.setVisibility(View.VISIBLE);
+            viewHolder.threeIv.setVisibility(View.INVISIBLE);
+            Picasso.with(context).load(oneUrl).into(viewHolder.oneIv);
+            Picasso.with(context).load(twoUrl).into(viewHolder.twoIv);
+        }else {
+            oneUrl = url.get(0);
+            twoUrl = url.get(1);
+            threeUrl = url.get(2);
+            Picasso.with(context).load(oneUrl).into(viewHolder.oneIv);
+            Picasso.with(context).load(twoUrl).into(viewHolder.twoIv);
+            Picasso.with(context).load(threeUrl).into(viewHolder.threeIv);
+            viewHolder.twoIv.setVisibility(View.VISIBLE);
+            viewHolder.threeIv.setVisibility(View.VISIBLE);
         }
 
         return convertView;
     }
 
-    private class CommunityOneViewHolder {
-        public CommunityOneViewHolder(View view) {
+    private class CommunityViewHolder {
 
+        private final CircleImageView handIcon;
+        private final TextView nickname;
+        private final TextView createTime;
+        private final TextView postsTitle;
+        private final TextView contentData;
+        private final ImageView oneIv;
+        private final ImageView twoIv;
+        private final ImageView threeIv;
+        private final TextView forumName;
+        private final TextView comment;
+        private final TextView praise;
+
+        public CommunityViewHolder(View view) {
+            handIcon = (CircleImageView) view.findViewById(R.id.community_one_iv_handIcon);
+            nickname = (TextView) view.findViewById(R.id.community_one_tv_nickname);
+            createTime = (TextView) view.findViewById(R.id.community_one_tv_createTime);
+            postsTitle = (TextView) view.findViewById(R.id.community_one_tv_postsTitle);
+            contentData = (TextView) view.findViewById(R.id.community_one_tv_contentData);
+            oneIv = (ImageView) view.findViewById(R.id.community_one_iv_contentData_one);
+            twoIv = (ImageView) view.findViewById(R.id.community_one_iv_contentData_two);
+            threeIv = (ImageView) view.findViewById(R.id.community_one_iv_contentData_three);
+            forumName = (TextView) view.findViewById(R.id.community_one_tv_forumName);
+            comment = (TextView) view.findViewById(R.id.community_one_tv_comment);
+            praise = (TextView) view.findViewById(R.id.community_one_tv_praise);
         }
     }
 
-    private class CommunityTwoViewHolder {
-    }
-
-    private class CommunityThreeViewHolder {
-    }
-
-    private class CommunityFourViewHolder {
+    public static final String getURLString(String str){
+        String urls = str.substring(0,str.indexOf("?"));
+        return urls;
     }
 }

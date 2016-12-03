@@ -29,7 +29,8 @@
             android:layout_marginTop="@dimen/fragment_recommend_layout_marginTop"
             android:layout_marginRight="@dimen/fragment_recommend_rv_layout_marginLeft"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/toolbar_search" />
+            android:background="@mipmap/toolbar_search"
+            android:id="@+id/recommend_iv_search"/>
     </RelativeLayout>
 
     <ListView

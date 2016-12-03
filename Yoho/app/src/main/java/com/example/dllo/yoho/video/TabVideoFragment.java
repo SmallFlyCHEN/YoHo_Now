@@ -4,15 +4,12 @@ package com.example.dllo.yoho.video;
 import android.view.View;
 import android.widget.ListView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.dllo.yoho.R;
 import com.example.dllo.yoho.URLValues;
 import com.example.dllo.yoho.base.BaseFragment;
-import com.google.gson.Gson;
+import com.example.dllo.yoho.volley.NetHelper;
+import com.example.dllo.yoho.volley.NetListener;
 
 import java.util.List;
 
@@ -38,23 +35,19 @@ public class TabVideoFragment extends BaseFragment{
     //初始化数据
     @Override
     protected void initData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(URLValues.TABVIDEO_URL, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.TABVIDEO_URL, TabVideoBean.class, new NetListener<TabVideoBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                TabVideoBean tabVideoBean = gson.fromJson(response, TabVideoBean.class);
-                List<TabVideoBean.DataBean.ContentBean> list = tabVideoBean.getData().getContent();
+            public void successListener(TabVideoBean response) {
+                List<TabVideoBean.DataBean.ContentBean> list = response.getData().getContent();
                 TabVideoAdapter tabVideoAdapter = new TabVideoAdapter(getActivity());
                 tabVideoAdapter.setList(list);
                 lv.setAdapter(tabVideoAdapter);
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dllo.yoho.recommend;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -10,16 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.dllo.yoho.MyPoint;
 import com.example.dllo.yoho.R;
 import com.example.dllo.yoho.URLValues;
 import com.example.dllo.yoho.base.BaseFragment;
-import com.google.gson.Gson;
+import com.example.dllo.yoho.volley.NetHelper;
+import com.example.dllo.yoho.volley.NetListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,7 @@ import java.util.List;
  * Created by dllo on 16/11/23.
  */
 
-public class RecommendFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment implements View.OnClickListener {
 
     private ArrayList<MyPoint> points;
     private RecommendAdapter adapter;
@@ -39,8 +37,9 @@ public class RecommendFragment extends BaseFragment {
     private ViewPager viewPager;
     private LinearLayout pointLin;
     private List<RecommendCarouselBean.DataBean> carouseList;
-    private ImageView imageView;
+    private ImageView drawer;
     private DrawerLayout drawerLayout;
+    private ImageView search;
 
     //绑定布局
     @Override
@@ -52,20 +51,25 @@ public class RecommendFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         lv = (ListView) view.findViewById(R.id.recommend_lv);
-        imageView = (ImageView) view.findViewById(R.id.iv_recommend_drawer);
+        drawer = (ImageView) view.findViewById(R.id.iv_recommend_drawer);
         drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.root_drawer);
+        search = (ImageView) view.findViewById(R.id.recommend_iv_search);
+        search.setOnClickListener(this);
     }
 
     //初始化数据
     @Override
     protected void initData() {
+        //获取数据
         getData();
+        //添加头布局
         addView();
+        //抽屉
         openDrawer();
     }
 
     private void openDrawer() {
-        imageView.setOnClickListener(new View.OnClickListener() {
+        drawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(Gravity.LEFT);
@@ -76,10 +80,10 @@ public class RecommendFragment extends BaseFragment {
 
     //添加头布局
     private void addView() {
-        View headview = getActivity().getLayoutInflater().inflate(R.layout.carousel_picture, null);
-        viewPager = (ViewPager) headview.findViewById(R.id.carousel_vp);
-        pointLin = (LinearLayout) headview.findViewById(R.id.carousel_ll);
-        lv.addHeaderView(headview);
+        View headView = getActivity().getLayoutInflater().inflate(R.layout.carousel_picture, null);
+        viewPager = (ViewPager) headView.findViewById(R.id.carousel_vp);
+        pointLin = (LinearLayout) headView.findViewById(R.id.carousel_ll);
+        lv.addHeaderView(headView);
         //轮播图
         Carousel();
     }
@@ -87,47 +91,38 @@ public class RecommendFragment extends BaseFragment {
     //请求listView数据
     private void getData() {
         lvAdapter = new RecommendLvAdapter(getContext());
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        StringRequest stringRequest = new StringRequest(URLValues.RECOMMEND_URL, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.RECOMMEND_URL, RecommendLvBean.class, new NetListener<RecommendLvBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                RecommendLvBean lvBean = gson.fromJson(response, RecommendLvBean.class);
-                List<RecommendLvBean.DataBean> list = lvBean.getData();
+            public void successListener(RecommendLvBean response) {
+                List<RecommendLvBean.DataBean> list = response.getData();
                 lvAdapter.setList(list);
                 lv.setAdapter(lvAdapter);
-            }
-        }, new Response.ErrorListener() {
+        }
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
 
     //轮播图数据
     private void Carousel() {
         points = new ArrayList<>();
         adapter = new RecommendAdapter(getActivity());
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(URLValues.CAROUSEL_URl, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.CAROUSEL_URl, RecommendCarouselBean.class, new NetListener<RecommendCarouselBean>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                RecommendCarouselBean carouselBean = gson.fromJson(response, RecommendCarouselBean.class);
-                carouseList = carouselBean.getData();
+            public void successListener(RecommendCarouselBean response) {
+                carouseList = response.getData();
                 adapter.setList(carouseList);
                 getPoint();
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
-
         viewPager.setAdapter(adapter);
 
         handler = new Handler(new Handler.Callback() {
@@ -139,6 +134,7 @@ public class RecommendFragment extends BaseFragment {
             }
         });
 
+        //开启一个线程让轮播图2秒跟换一次
         if (flag) {
             new Thread(new Runnable() {
                 @Override
@@ -164,7 +160,7 @@ public class RecommendFragment extends BaseFragment {
     //圆点的设置
     public void getPoint() {
         for (int i = 0; i < carouseList.size(); i++) {
-            MyPoint point = new MyPoint(getActivity());
+            MyPoint point = new MyPoint(context);
             if (i == 0) {
                 point.setSelected(true);
             }
@@ -185,5 +181,12 @@ public class RecommendFragment extends BaseFragment {
         super.onDestroy();
         //轮播图
 //        handler.removeMessages(1);
+    }
+
+    //搜索键的点击事件
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), SearchActivity.class);
+        startActivity(intent);
     }
 }

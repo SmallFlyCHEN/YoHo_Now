@@ -7,7 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/paddingBottom">
 
         <ImageView
             android:id="@+id/column_iv_cover"
@@ -21,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/recommend_iv"
             android:gravity="center"
+            android:textColor="@color/newmagazin_tv"
             android:id="@+id/column_tv_title"/>
     </RelativeLayout>
 

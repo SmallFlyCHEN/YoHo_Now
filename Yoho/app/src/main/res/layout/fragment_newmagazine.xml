@@ -170,7 +170,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_gril_one"
@@ -192,7 +194,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_gril_two"
@@ -214,7 +218,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_gril_three"
@@ -282,7 +288,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_spec_one"
@@ -304,7 +312,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_spec_two"
@@ -326,7 +336,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding"
+                android:layout_marginRight="@dimen/padding">
 
                 <ImageView
                     android:id="@+id/new_magazine_iv_spec_three"

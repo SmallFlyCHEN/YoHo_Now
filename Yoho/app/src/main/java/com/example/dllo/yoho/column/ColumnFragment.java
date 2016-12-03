@@ -1,19 +1,17 @@
 package com.example.dllo.yoho.column;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.example.dllo.yoho.R;
 import com.example.dllo.yoho.URLValues;
 import com.example.dllo.yoho.base.BaseFragment;
-import com.google.gson.Gson;
+import com.example.dllo.yoho.volley.NetHelper;
+import com.example.dllo.yoho.volley.NetListener;
+import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -23,9 +21,10 @@ import java.util.List;
 
 public class ColumnFragment extends BaseFragment{
 
-    private SwipeRefreshLayout sr;
-    private RecyclerView rv;
+    private LRecyclerView rv;
     private ColumnAdapter columnAdapter;
+    private LRecyclerViewAdapter lRecyclerViewAdapter;
+    private RecyclerViewHeader header;
 
     //绑定布局
     @Override
@@ -36,8 +35,8 @@ public class ColumnFragment extends BaseFragment{
     //初始化组件
     @Override
     protected void initView(View view) {
-        sr = (SwipeRefreshLayout) view.findViewById(R.id.column_sr);
-        rv = (RecyclerView) view.findViewById(R.id.column_rv);
+        rv = (LRecyclerView) view.findViewById(R.id.column_rv);
+        header = (RecyclerViewHeader) view.findViewById(R.id.column_header);
     }
 
     //初始化数据
@@ -50,25 +49,23 @@ public class ColumnFragment extends BaseFragment{
     //网络请求
     private void getData(){
         columnAdapter = new ColumnAdapter(getContext());
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        StringRequest stringRequest = new StringRequest(URLValues.COLUMN_URl, new Response.Listener<String>() {
+        NetHelper.MyRequest(URLValues.COLUMN_URl, ColumnBean.class, new NetListener<ColumnBean>() {
             @Override
-            public void onResponse(String response) {
-
-                Gson gson = new Gson();
-                ColumnBean columnBean = gson.fromJson(response, ColumnBean.class);
-                List<ColumnBean.DataBean> list = columnBean.getData();
+            public void successListener(ColumnBean response) {
+                List<ColumnBean.DataBean> list = response.getData();
                 columnAdapter.setList(list);
-                rv.setAdapter(columnAdapter);
+                lRecyclerViewAdapter = new LRecyclerViewAdapter(columnAdapter);
+                rv.setAdapter(lRecyclerViewAdapter);
                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                 rv.setLayoutManager(manager);
+                header.attachTo(rv, true);
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void errorListener(VolleyError error) {
 
             }
         });
-        requestQueue.add(stringRequest);
     }
+
 }
