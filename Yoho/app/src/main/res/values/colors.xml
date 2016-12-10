@@ -8,4 +8,6 @@
     <color name="recommend_tv">#1b7ad4</color>
     <color name="new_magazine">#e6e1e1</color>
     <color name="magazine_tv">#FFD4CFCF</color>
+    <color name="cancle">#cccccc</color>
+    <color name="btn">#36a74c</color>
 </resources>

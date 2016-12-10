@@ -40,4 +40,8 @@ public class URLValues {
     public static final String COMMUNITY_FCF_URL = "http://social.yoho.cn/social?appType=2&app_version=5.0.4&client_secret" +
             "=c93f2c29298e27c3abbab38628fab244&client_type=android&method=app.social.getForumCarouselInfo&os_version" +
             "=android5.1%3AGoogle_Nexus_5_-_5.1.0_-_API_22_-_1080x1920&screen_size=1080x1776&v=7";
+    //栏目二级界面
+    public static final String COLUMN_TWO = "http://new.yohoboys.com/yohoboyins/v5/channel/lookbook";
+    //栏目三级界面
+    public static final String COLUMN_THREE = "http://new.yohoboys.com/yohoboyins/v5/channel/getContentDetail";
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#444444">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="注册Yoho!Family"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:textColor="#fff"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:src="@mipmap/failure_icon"
+            android:id="@+id/register_iv_failure"
+            android:layout_gravity="right" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="国家和地区"
+            android:textColor="#fff"
+            android:layout_marginLeft="20dp"
+            android:textSize="15dp"
+            android:gravity="center_vertical"
+            android:background="#575757"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:textSize="15dp"
+            android:gravity="center_vertical"
+            android:text="中国   >"
+            android:background="#575757"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="#575757"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="#fff"
+            android:text="+86"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="6"
+            android:background="#575757"
+            android:hint="手机号"
+            android:textSize="15dp"
+            android:textColorHint="#808080"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:text="下一步"
+        android:background="#A2A2A2"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:text="Yoho!Family账号登录YohoBuy!有货、Yoho!Now及     SHOW"/>
+</LinearLayout>

@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -41,6 +43,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_margin="10dp"
             android:id="@+id/community_one_tv_postsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,6 +51,7 @@
             android:ellipsize="end"/>
 
         <TextView
+            android:layout_margin="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/community_one_tv_contentData"
             android:layout_width="match_parent"
@@ -56,6 +60,7 @@
             android:ellipsize="end"/>
     </LinearLayout>
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
@@ -90,6 +95,7 @@
 
 
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

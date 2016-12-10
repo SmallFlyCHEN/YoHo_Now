@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,21 +13,26 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.android.volley.VolleyError;
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.example.dllo.yoho.MyPoint;
 import com.example.dllo.yoho.R;
 import com.example.dllo.yoho.URLValues;
 import com.example.dllo.yoho.base.BaseFragment;
 import com.example.dllo.yoho.volley.NetHelper;
 import com.example.dllo.yoho.volley.NetListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by dllo on 16/11/23.
  */
 
-public class RecommendFragment extends BaseFragment implements View.OnClickListener {
+public class RecommendFragment extends BaseFragment implements View.OnClickListener, OnRefreshListener, OnLoadMoreListener {
 
     private ArrayList<MyPoint> points;
     private RecommendAdapter adapter;
@@ -40,6 +46,12 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
     private ImageView drawer;
     private DrawerLayout drawerLayout;
     private ImageView search;
+    private SwipeToLoadLayout swipeToLoadLayout;
+    private int bodyNum = 0;
+    private HashMap<String, String> mapData;
+    private HashMap<String, String> map;
+    private Gson gson;
+    private List<RecommendLvBean.DataBean> list;
 
     //绑定布局
     @Override
@@ -50,11 +62,14 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
     //初始化组件
     @Override
     protected void initView(View view) {
-        lv = (ListView) view.findViewById(R.id.recommend_lv);
+        lv = (ListView) view.findViewById(R.id.swipe_target);
         drawer = (ImageView) view.findViewById(R.id.iv_recommend_drawer);
         drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.root_drawer);
         search = (ImageView) view.findViewById(R.id.recommend_iv_search);
         search.setOnClickListener(this);
+        swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
+        swipeToLoadLayout.setOnRefreshListener(this);
+        swipeToLoadLayout.setOnLoadMoreListener(this);
     }
 
     //初始化数据
@@ -66,8 +81,38 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
         addView();
         //抽屉
         openDrawer();
+        //自动更新
+        autoRefresh();
+        //post解析
+        RecommendMap();
+
     }
 
+    private void RecommendMap() {
+        map = new HashMap<>();
+        map.put("newsEndtime", "0");
+        map.put("otherEndTime", "0");
+        map.put("magazineType", "3");
+        map.put("WallpaperType", "3");
+        map.put("scale", "2");
+        map.put("num", String.valueOf(bodyNum));
+        map.put("platform", "4");
+        map.put("locale", "zh-Hans");
+        map.put("language", "zh-Hans");
+        map.put("udid", "00000000000000063aa461b71c4cfcf");
+        map.put("curVersion", "5.0.4");
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("udid", "00000000000000063aa461b71c4cfcf");
+        gson = new Gson();
+        String str = gson.toJson(hashMap).toString();
+        map.put("authInfo", str);
+        String value = gson.toJson(map).toString();
+        mapData = new HashMap<>();
+        mapData.put("parameters", value);
+    }
+
+    //抽屉
     private void openDrawer() {
         drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,20 +135,22 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
 
     //请求listView数据
     private void getData() {
-        lvAdapter = new RecommendLvAdapter(getContext());
+
+
         NetHelper.MyRequest(URLValues.RECOMMEND_URL, RecommendLvBean.class, new NetListener<RecommendLvBean>() {
             @Override
             public void successListener(RecommendLvBean response) {
-                List<RecommendLvBean.DataBean> list = response.getData();
+                lvAdapter = new RecommendLvAdapter(getContext());
+                list = response.getData();
                 lvAdapter.setList(list);
                 lv.setAdapter(lvAdapter);
-        }
+            }
 
             @Override
             public void errorListener(VolleyError error) {
 
             }
-        });
+        }, mapData);
     }
 
     //轮播图数据
@@ -189,4 +236,77 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent);
     }
+
+    //下拉刷新
+    @Override
+    public void onRefresh() {
+        swipeToLoadLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeToLoadLayout.setRefreshing(false);
+                NetHelper.MyRequest(URLValues.RECOMMEND_URL, RecommendLvBean.class, new NetListener<RecommendLvBean>() {
+
+                    @Override
+                    public void successListener(RecommendLvBean response) {
+                        list = response.getData();
+                        lvAdapter.setList(list);
+                    }
+
+                    @Override
+                    public void errorListener(VolleyError error) {
+
+                    }
+                }, mapData);
+            }
+            //数字代表2秒后加载数据
+        }, 2000);
+    }
+
+    //上拉加载
+    @Override
+    public void onLoadMore() {
+        swipeToLoadLayout.postDelayed(new Runnable() {
+
+
+
+
+            @Override
+            public void run() {
+
+                RecommendMap();
+
+                swipeToLoadLayout.setLoadingMore(false);
+                NetHelper.MyRequest(URLValues.RECOMMEND_URL, RecommendLvBean.class, new NetListener<RecommendLvBean>() {
+                    @Override
+                    public void successListener(RecommendLvBean response) {
+                        list.addAll(response.getData());
+                        lvAdapter.setList(list);
+                        bodyNum += 16;
+                        map.put("bodyNnm", String.valueOf(bodyNum));
+                        String value = gson.toJson(map).toString();
+                        Log.d("RecommendFragment", map.get("bodyNnm"));
+                        mapData.put("parameters", value);
+                        RecommendMap();
+                        Log.d("RecommendFragment", "response.getData():" + response.getData());
+                    }
+
+                    @Override
+                    public void errorListener(VolleyError error) {
+
+                    }
+                }, mapData);
+            }
+        }, 2000);
+    }
+
+    //自动更新
+    private void autoRefresh() {
+        swipeToLoadLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeToLoadLayout.setRefreshing(false);
+            }
+        });
+    }
+
 }

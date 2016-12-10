@@ -59,7 +59,9 @@ public class WallPaperAdapter extends BaseAdapter{
         Picasso.with(context).load(list.get(position).getImages().get(0).getThumbImage()).into(viewHolder.zeroIv);
         Picasso.with(context).load(list.get(position).getImages().get(1).getThumbImage()).into(viewHolder.oneIv);
         Picasso.with(context).load(list.get(position).getImages().get(2).getThumbImage()).into(viewHolder.twoIv);
-        Picasso.with(context).load(list.get(position).getImages().get(3).getThumbImage()).into(viewHolder.threeIv);
+        if (list.get(position).getImages().size() == 4){
+            Picasso.with(context).load(list.get(position).getImages().get(3).getThumbImage()).into(viewHolder.threeIv);
+        }
         viewHolder.journal.setText(list.get(position).getJournal());
         viewHolder.month.setText(list.get(position).getMonth());
         return convertView;

@@ -28,6 +28,7 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.MyViewHold
 
     public ColumnAdapter setList(List<ColumnBean.DataBean> list) {
         this.list = list;
+        notifyDataSetChanged();
         return this;
     }
 

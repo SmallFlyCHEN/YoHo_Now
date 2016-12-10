@@ -1,5 +1,6 @@
 //noinspection GradleCompatible
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 23
@@ -18,6 +19,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    greendao{
+        schemaVersion 1
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -35,4 +40,8 @@ dependencies {
     compile 'com.dalong.coverflow:coverflow:1.0.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.youth.banner:banner:1.4.4'
+    compile 'com.lai.weavey:dialog:1.1'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.3'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile files('libs/ShareSDK-Alipay-2.7.10.jar')
 }

@@ -116,7 +116,6 @@ public class RecommendLvBean {
             private String updateMd5;
             private int imgNum;
             private int type;
-            private List<TagBean> tag;
 
             public String getId() {
                 return id;
@@ -254,13 +253,6 @@ public class RecommendLvBean {
                 this.type = type;
             }
 
-            public List<TagBean> getTag() {
-                return tag;
-            }
-
-            public void setTag(List<TagBean> tag) {
-                this.tag = tag;
-            }
 
             public static class TagBean {
                 /**

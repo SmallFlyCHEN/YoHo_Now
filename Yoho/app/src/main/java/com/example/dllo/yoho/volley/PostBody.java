@@ -29,10 +29,10 @@ public class PostBody {
         this.startTime = "0";
         this.ruleTime = "0";
         //接口中 value嵌套的key value
-        HashMap<String, String> vv = new HashMap<>();
-        vv.put("udid", "00000000000000063aa461b71c4cfcf");
-        String a = new Gson().toJson(vv).toString();
-        this.authInfo = a;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("udid", "00000000000000063aa461b71c4cfcf");
+        String str = new Gson().toJson(map).toString();
+        this.authInfo = str;
     }
 
     public void setChannelId(String channelId) {

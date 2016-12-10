@@ -116,7 +116,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
-                android:src="@mipmap/default_head" />
+                android:src="@mipmap/default_head"
+                android:id="@+id/main_logon"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -150,7 +151,8 @@
                 android:layout_marginTop="25dp"
                 android:text="我的杂志"
                 android:textColor="#fff"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:id="@+id/drawer_magazine"/>
 
             <TextView
                 android:layout_width="wrap_content"

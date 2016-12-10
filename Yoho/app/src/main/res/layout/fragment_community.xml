@@ -35,9 +35,17 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@mipmap/community_home_plz_login_bg"
-            android:layout_margin="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="400dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true" />
+            android:id="@+id/community_home_plz_login"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请登录"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/community_home_plz_login"
+            android:layout_marginRight="25dp"/>
     </RelativeLayout>
 
 </LinearLayout>

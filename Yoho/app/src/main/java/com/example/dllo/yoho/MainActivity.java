@@ -1,17 +1,22 @@
 package com.example.dllo.yoho;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
+import com.example.dllo.yoho.Logon.LogonActivity;
 import com.example.dllo.yoho.base.BaseActivity;
 import com.example.dllo.yoho.column.ColumnFragment;
 import com.example.dllo.yoho.community.CommunityFragment;
 import com.example.dllo.yoho.magazine.MagazineFragment;
+import com.example.dllo.yoho.mymagazine.MyMagazineActivity;
 import com.example.dllo.yoho.recommend.RecommendFragment;
 import com.example.dllo.yoho.video.VideoFragment;
 
@@ -24,6 +29,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RadioButton video;
     private RecommendFragment recommendFragment;
     private DrawerLayout drawerLayout;
+    private ImageView logon;
+    private TextView myMagazine;
 
     //绑定布局
     @Override
@@ -41,12 +48,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         community = (RadioButton) findViewById(R.id.main_community);
         magazine = (RadioButton) findViewById(R.id.main_magazine);
         video = (RadioButton) findViewById(R.id.main_video);
+        logon = (ImageView) findViewById(R.id.main_logon);
+        myMagazine = (TextView) findViewById(R.id.drawer_magazine);
 
         recommend.setOnClickListener(this);
         column.setOnClickListener(this);
         community.setOnClickListener(this);
         magazine.setOnClickListener(this);
         video.setOnClickListener(this);
+        logon.setOnClickListener(this);
+        myMagazine.setOnClickListener(this);
 
     }
 
@@ -83,6 +94,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 VideoFragment videoFragment = new VideoFragment();
                 addFragment(videoFragment);
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                break;
+            case R.id.main_logon:
+                Intent intent = new Intent(this, LogonActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.drawer_magazine:
+                Intent intentMagazine = new Intent(this, MyMagazineActivity.class);
+                startActivity(intentMagazine);
                 break;
         }
     }
